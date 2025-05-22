@@ -1,2 +1,2 @@
 #!/bin/bash
-uvicorn app.main:app --host 0.0.0.0 --port 8800 --reload
+python3 -m app.main

@@ -1,5 +1,6 @@
 from app.models import PokerRequest, PokerResponse
 
+
 def calculate_probabilities(request: PokerRequest) -> PokerResponse:
     """
     Simple deterministic calculator:

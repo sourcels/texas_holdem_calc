@@ -1,9 +1,19 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Callable
+from starlette.types import ASGIApp
+
+
+class Config(BaseModel):
+    app: ASGIApp
+    host: str
+    port: int
+    reload: str
+    log_level: str
+    workers: int
 
 class PokerRequest(BaseModel):
-    player_hand: List[str]  # ['As', 'Kd']
-    community_cards: List[str]  # ['2c', '5d', 'Jh']
+    player_hand: List[str]
+    community_cards: List[str]
 
 class PokerResponse(BaseModel):
     win_chance: float

@@ -8,4 +8,3 @@ app = FastAPI(title="Texas Hold'em Calculator")
 async def calculate(request: PokerRequest):
     result = calculate_probabilities(request)
     return result
-
