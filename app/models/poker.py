@@ -1,15 +1,6 @@
 from pydantic import BaseModel
-from typing import List, Callable
-from starlette.types import ASGIApp
+from typing import List
 
-
-class Config(BaseModel):
-    app: ASGIApp
-    host: str
-    port: int
-    reload: str
-    log_level: str
-    workers: int
 
 class PokerRequest(BaseModel):
     player_hand: List[str]

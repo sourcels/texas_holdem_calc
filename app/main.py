@@ -1,17 +1,6 @@
-from fastapi import FastAPI
-from config import load_uvicorn
-import uvicorn
+from app.core.app_instance import app
+from app.routes import html, service
 
 
-app = FastAPI(title="Texas Hold'em Calculator")
-
-if __name__ == "__main__":
-    payload = load_uvicorn()
-    uvicorn.run(
-        app=payload["app"],
-        host=payload["host"],
-        port=payload["port"],
-        reload=payload["reload"],
-        log_level=payload["log_level"],
-        workers=payload["workers"]
-    )
+app.include_router(html.html_router)
+app.include_router(service.service_router)

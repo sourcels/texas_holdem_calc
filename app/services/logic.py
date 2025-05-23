@@ -1,4 +1,4 @@
-from models import PokerRequest, PokerResponse
+from app.models.poker import PokerRequest, PokerResponse
 
 
 def calculate_probabilities(request: PokerRequest) -> PokerResponse:
