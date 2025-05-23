@@ -3,7 +3,7 @@ from fastapi.responses import HTMLResponse
 from app.core.app_instance import templates
 
 
-html_router = APIRouter(prefix="", tags=["HTML"])
+html_router = APIRouter(prefix="", tags=["Homepage"])
 
 @html_router.get("/", response_class=HTMLResponse)
 async def root(request: Request):

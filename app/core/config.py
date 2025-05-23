@@ -1,14 +1,12 @@
 from pydantic import BaseSettings, Field
 
 class Settings(BaseSettings):
-    host: str = Field("127.0.0.1", env="HOST")
-    port: int = Field(8000, env="PORT")
-    debug: bool = Field(True, env="DEBUG")
-    reload: bool = Field(True, env="RELOAD")
-
-    database_url: str = Field(..., env="DATABASE_URL")  # required
-
-    max_players: int = Field(9, env="MAX_PLAYERS")
+    host: str = Field("0.0.0.0", env="HOST")
+    port: int = Field(8800, env="PORT")
+    log_level: str = Field("info", env="LOG_LEVEL")
+    workers: int = Field(2, env="WORKERS")
+    jwt_secret: str = Field("0000", env="JWT_SECRET")
+    database_url: str = Field(..., env="DATABASE_URL")
     
     class Config:
         env_file = ".env"
