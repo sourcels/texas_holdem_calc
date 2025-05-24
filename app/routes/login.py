@@ -1,27 +1,45 @@
 from fastapi import APIRouter, Request, Form, Depends, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse
+from app.core.app_instance import templates
+from app.core.config import settings
 from app.services.auth import verify_password, create_token
-from app.services.storage import get_users
+from app.services.storage import minio_ctrl
 from starlette.status import HTTP_302_FOUND
 
 
-login_router = APIRouter(prefix="/login", tags=["API"])
+login_router = APIRouter(prefix="/login", tags=["HTML", "API"])
 
-@login_router.post("/login", response_class=HTMLResponse)
-async def login(
+@login_router.get("/login", response_class=HTMLResponse)
+async def login_page(request: Request):
+    next_url = request.query_params.get("next", "/")
+    return templates.TemplateResponse("login.html", {
+        "request": request,
+        "next": next_url
+    })
+
+@login_router.post("/login")
+async def login_user(
     request: Request,
     username: str = Form(...),
     password: str = Form(...),
-    redirect: str = Form(default="/")
+    next: str = Form("/")
 ):
-    users = get_users()
-    user = users.get(username)
+    if username == "admin" and password == "admin":
+        token = create_token(username=username, role="admin")
 
-    if not user or not verify_password(password, user["password"]):
-        raise HTTPException(status_code=401, detail="Invalid credentials")
+        response = RedirectResponse(url=next, status_code=302)
+        response.set_cookie(
+            key="access_token",
+            value=token,
+            httponly=True,
+            max_age=settings.jwt_expires_min*60,
+            secure=True,
+            samesite="lax"
+        )
+        return response
 
-    token = create_token({"sub": username, "role": user["role"]})
-    
-    response = RedirectResponse(url=redirect, status_code=HTTP_302_FOUND)
-    response.set_cookie(key="access_token", value=f"Bearer {token}", httponly=True)
-    return response
+    return templates.TemplateResponse("login.html", {
+        "request": request,
+        "next": next,
+        "error": "Invalid credentials"
+    })
