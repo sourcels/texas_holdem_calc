@@ -1,15 +1,15 @@
 from fastapi import APIRouter, Request, Form, Depends, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse
-from app.core.app_instance import templates
+from app.templates import templates
 from app.core.config import settings
 from app.services.auth import verify_password, create_token
 from app.services.storage import minio_ctrl
 from starlette.status import HTTP_302_FOUND
 
 
-login_router = APIRouter(prefix="/login", tags=["HTML", "API"])
+login_router = APIRouter(prefix="/login", tags=["HTML", "SECURITY"])
 
-@login_router.get("/login", response_class=HTMLResponse)
+@login_router.get("", response_class=HTMLResponse)
 async def login_page(request: Request):
     next_url = request.query_params.get("next", "/")
     return templates.TemplateResponse("login.html", {
@@ -17,7 +17,7 @@ async def login_page(request: Request):
         "next": next_url
     })
 
-@login_router.post("/login")
+@login_router.post("")
 async def login_user(
     request: Request,
     username: str = Form(...),

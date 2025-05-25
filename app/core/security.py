@@ -1,5 +1,4 @@
 from fastapi import Request, Depends, HTTPException, status
-from fastapi.responses import RedirectResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from jose import jwt, JWTError
 from app.models.user import TokenData
@@ -11,13 +10,13 @@ def get_current_user(request: Request, credentials: HTTPAuthorizationCredentials
     token = request.cookies.get("access_token")
 
     if not token:
-        return RedirectResponse(url=f"/login?next={request.url.path}")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated")
 
     try:
         payload = jwt.decode(token, settings.jwt_secret, algorithms=["HS256"])
         return TokenData(**payload)
     except JWTError:
-        return RedirectResponse(url=f"/login?next={request.url.path}")
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
 
 def require_role(role: str):
     def role_dependency(user: TokenData = Depends(get_current_user)):

@@ -1,0 +1,130 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+body {
+    margin: 0; padding: 0; height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    color: #f0f4ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+html {
+    margin: 0; padding: 0; height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background: linear-gradient(135deg, #0d1b40, #1a2a66);
+    color: #f0f4ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    background-color: #122a72;
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+h1 {
+    margin: 0 0 1.5rem 0;
+    font-weight: 700;
+    font-size: 1.8rem;
+    text-align: center;
+    letter-spacing: 1.5px;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+input#username {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    background-color: #1e3a9b;
+    color: #e0e7ff;
+    transition: background-color 0.3s ease;
+}
+input#username:focus {
+    outline: none;
+    background-color: #274ba1;
+    box-shadow: 0 0 8px #4078f0;
+}
+
+input#password {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    background-color: #1e3a9b;
+    color: #e0e7ff;
+    transition: background-color 0.3s ease;
+}
+input#password:focus {
+    outline: none;
+    background-color: #274ba1;
+    box-shadow: 0 0 8px #4078f0;
+}
+
+button {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    background-color: #3b5edb;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+}
+button:hover,
+button:focus {
+    background-color: #2c4db7;
+    outline: none;
+}
+
+.forgot-password {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    text-align: center;
+}
+.forgot-password a {
+    color: #a9c1ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.forgot-password a:hover,
+.forgot-password a:focus {
+    color: #d0dbff;
+    text-decoration: underline;
+    outline: none;
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 2rem 1.5rem;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+    input[type="text"],
+    input[type="password"],
+    button {
+        font-size: 0.95rem;
+        padding: 0.65rem 0.9rem;
+    }
+}

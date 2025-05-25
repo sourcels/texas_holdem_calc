@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login</title>
+    <link rel="icon" type="image/png" href="static/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="static/favicon.svg" />
+    <link rel="shortcut icon" href="static/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="static/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Poker Calc" />
+    <link rel="manifest" href="static/site.webmanifest" />
+    <link rel="stylesheet" href="/static/styles/login.css" />
+</head>
+<body>
+    <main class="login-container" role="main" aria-label="Login form">
+        <h1>Texas Calc</h1>
+        <form method="POST" action="/login">
+            <input type="text" id="username" name="username" required autocomplete="username" placeholder="username" />
+
+            <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="password" />
+
+            <button type="submit" aria-label="login">Login</button>
+        </form>
+
+        <p class="forgot-password">
+            <a href="/forgot-password" tabindex="0">Forgot password?</a>
+        </p>
+    </main>
+</body>
+</html>
